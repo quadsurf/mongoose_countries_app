@@ -8,7 +8,6 @@ Each country should have a/an:
 - flag (this should be an image URL)
 - capital 
 - population (this should be a number)
-- cities (this should be an array)
 
 ### Getting started
 
@@ -21,5 +20,6 @@ Each country should have a/an:
 ### Bonus
 
 - Style your application using bootstrap or custom css(if you want to do this, remember to use `express.static`)
-- Research `res.send` and see what happens when you send back mongoDB data with `res.send` and think about how AJAX would work with your application!
+- Add a property to your countries schema which is called `cities` (this should be an array). A user should be able to add and update cities for each country.
+
 
