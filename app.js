@@ -1,13 +1,16 @@
 var express = require("express"),
 app = express(),
 methodOverride = require('method-override'),
-bodyParser = require("body-parser");
+bodyParser = require("body-parser"),
+morgan = require("morgan")
 db = require("./models");
+
 
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(methodOverride('_method'));
+app.use(morgan('tiny'));
 
 app.get('/', function(req,res){
   res.redirect('/countries');
@@ -19,7 +22,6 @@ app.get('/countries', function(req,res){
     if (err) throw err;
     res.render("countries/index", {countries:countries});
   });
-
 });
 
 // NEW
@@ -29,7 +31,10 @@ app.get('/countries/new', function(req,res){
 
 // CREATE
 app.post('/countries', function(req,res){
-  db.Country.create(req.body.country,function(err,countries){
+    var country = new db.Country(req.body.country);
+    var cities = req.body.cities.trim().split(", ");
+    country.cities = cities;
+    country.save(function(err){
       if (err) throw err;
       res.redirect('/');
     });
@@ -40,7 +45,7 @@ app.post('/countries', function(req,res){
 app.get('/countries/:id', function(req,res){
   db.Country.findById(req.params.id,function(err,country){
     if (err) throw err;
-    res.render("countries/edit", {country:country});
+    res.render("countries/show", {country:country});
   });
 });
 
@@ -49,16 +54,20 @@ app.get('/countries/:id', function(req,res){
 app.get('/countries/:id/edit', function(req,res){
   db.Country.findById(req.params.id,function(err,country){
     if (err) throw err;
-    res.render("edit", {country:country});
+    res.render("countries/edit", {country:country});
   });
 });
 
 // UPDATE
 app.put('/countries/:id', function(req,res){
-  db.Country.findByIdAndUpdate(req.params.id, req.body.country, function(err,book){
-    if (err) throw err;
-    res.redirect('/');
+  db.Country.findById(req.params.id,function(err,country){
+    country = req.body.country;
+    country.cities = req.body.cities.trim().split(", ");
+    country.save(function(err,country){
+      if (err) throw err;
+      res.redirect('/');
     });
+  });
 });
 
 // DESTROY

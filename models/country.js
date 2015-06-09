@@ -1,4 +1,4 @@
-var mongoose = require("mongoose")
+var mongoose = require("mongoose");
 
 var countrySchema = new mongoose.Schema({
   name: String,
@@ -8,6 +8,6 @@ var countrySchema = new mongoose.Schema({
   cities: []
 });
 
-var Country = mongoose.Model("Country", countrySchema);
+var Country = mongoose.model("Country", countrySchema);
 
 module.exports = Country;
