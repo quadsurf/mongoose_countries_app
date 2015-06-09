@@ -20,6 +20,6 @@ Each country should have a/an:
 ### Bonus
 
 - Style your application using bootstrap or custom css(if you want to do this, remember to use `express.static`)
-- Add a property to your countries schema which is called `cities` (this should be an array). A user should be able to add and update cities for each country.
+- Add a property to your countries schema which is called `cities` (this should be an array). A user should be able to add and update cities for each country. When the user adds/updates cities - they should include them as a comma seperated list. Your application should take each city and add it to the cities array for that country.
 
 
