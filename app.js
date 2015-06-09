@@ -32,7 +32,7 @@ app.get('/countries/new', function(req,res){
 // CREATE
 app.post('/countries', function(req,res){
     var country = new db.Country(req.body.country);
-    var cities = req.body.cities.trim().split(", ");
+    var cities = req.body.cities.split(", ");
     country.cities = cities;
     country.save(function(err){
       if (err) throw err;
@@ -61,8 +61,11 @@ app.get('/countries/:id/edit', function(req,res){
 // UPDATE
 app.put('/countries/:id', function(req,res){
   db.Country.findById(req.params.id,function(err,country){
-    country = req.body.country;
-    country.cities = req.body.cities.trim().split(", ");
+    // loop over all keys in object
+    for(var prop in req.body.country){
+      country.prop = req.body.country[prop];
+    }
+    country.cities = req.body.cities.split(", ");
     country.save(function(err,country){
       if (err) throw err;
       res.redirect('/');
