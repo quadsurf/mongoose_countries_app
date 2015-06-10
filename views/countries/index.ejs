@@ -1,0 +1,17 @@
+<% include ../partials/header %>
+<h1>See all the countries</h1>
+
+<% countries.forEach(function(country){ %>
+  <p>
+    Name: <%= country.name%>
+  </p>
+  <p>
+    Population: <%= country.population%>
+  </p>
+  <p>
+    Flag: <img src="<%= country.flag%>" alt="FLAG PICTURE GOES HERE" width=200 height=200>
+  </p>
+  <p>Capital: <%= country.capital%></p>
+<% })%>
+
+<% include ../partials/footer %>
