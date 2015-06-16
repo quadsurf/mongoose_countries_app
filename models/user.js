@@ -12,7 +12,7 @@ var userSchema = new mongoose.Schema({
     password: {
       type: String,
       required: true
-    },
+    }
   });
 
 userSchema.pre('save', function(next) {
@@ -47,7 +47,7 @@ userSchema.statics.authenticate = function (formData, callback) {
     },
     function (err, user) {
       if (user === null){
-        callback("Invalid username or password",null);
+        callback("Invalid email or password",null);
       }
       else {
         user.checkPassword(formData.password, callback);
@@ -59,11 +59,13 @@ userSchema.statics.authenticate = function (formData, callback) {
 // methods === INSTANCE METHODS!
 userSchema.methods.checkPassword = function(password, callback) {
   var user = this;
+  // password === plain text
+  // user.password === hashed password that we store in our DB
   bcrypt.compare(password, user.password, function (err, isMatch) {
     if (isMatch) {
       callback(null, user);
     } else {
-      callback("Invalid username or password", null);
+      callback("Invalid email or password", null);
     }
   });
 };

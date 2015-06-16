@@ -14,3 +14,12 @@ var loginMiddleware = function (req, res, next) {
 };
 
 module.exports = loginMiddleware;
+
+
+
+// in our app.js
+// app.use(loginMiddleware)
+
+// // once that's been done we now have access to 2 functions
+// // 1 - req.login()
+// // 2 - req.logout()

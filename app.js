@@ -15,12 +15,15 @@ app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({extended:true}));
 
 app.use(loginMiddleware);
+// app.use(routeMiddleware)
 
 app.use(session({
   maxAge: 3600000,
   secret: 'illnevertell',
   name: "chocolate chip"
 }));
+
+
 
 app.get('/', routeMiddleware.ensureLoggedIn, function(req,res){
   res.redirect('/countries');
