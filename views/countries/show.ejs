@@ -2,13 +2,13 @@
   <h1>See more about <%= country.name%></h1>
 
   <h3>
-    Capital: <%= country.capital%>
+    Capital: <%=country.capital%>
   </h3>
   <h3>
     Population: <%= country.population%>
   </h3>
     <h3>
-      Flag: <img src="<%= country.flag%>" alt="Flag" width=200 height=200>
+      Flag: <img src="/<%= country.flag%>" alt="Flag" width=200 height=200>
     </h3>
   <h3>
     <a href="/countries/<%= country.id%>/edit">Edit <%= country.name%></a>

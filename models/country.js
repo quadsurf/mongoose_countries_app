@@ -5,7 +5,8 @@ var countrySchema = new mongoose.Schema({
   flag: String,
   capital: String,
   population: Number,
-  cities: []
+  cities: [],
+  userId: String
 });
 
 var Country = mongoose.model("Country", countrySchema);
