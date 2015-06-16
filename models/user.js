@@ -63,7 +63,7 @@ userSchema.methods.checkPassword = function(password, callback) {
     if (isMatch) {
       callback(null, user);
     } else {
-      callback(err, null);
+      callback("Invalid username or password", null);
     }
   });
 };

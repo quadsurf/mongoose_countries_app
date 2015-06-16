@@ -27,7 +27,7 @@ app.get('/', routeMiddleware.ensureLoggedIn, function(req,res){
 });
 
 app.get('/signup', routeMiddleware.preventLoginSignup ,function(req,res){
-  res.render('users/signup');
+  res.render('users/signup', {errorMessage: undefined});
 });
 
 app.post("/signup", function (req, res) {
@@ -38,15 +38,14 @@ app.post("/signup", function (req, res) {
       res.redirect("/countries");
     } else {
       console.log(err);
-      // TODO - handle errors in ejs!
-      res.render("users/signup");
+      res.render("users/signup", {errorMessage: "Email or password can not be blank"});
     }
   });
 });
 
 
 app.get("/login", routeMiddleware.preventLoginSignup, function (req, res) {
-  res.render("users/login");
+  res.render("users/login", {errorMessage: undefined});
 });
 
 app.post("/login", function (req, res) {
@@ -56,8 +55,7 @@ app.post("/login", function (req, res) {
       req.login(user);
       res.redirect("/countries");
     } else {
-      // TODO - handle errors in ejs!
-      res.render("users/login");
+      res.render("users/login", {errorMessage: err});
     }
   });
 });
@@ -92,7 +90,6 @@ app.post('/countries', routeMiddleware.ensureLoggedIn, function(req,res){
 
 app.get('/countries/:id', routeMiddleware.ensureLoggedIn, function(req,res){
   db.Country.findById(req.params.id,function(err,country){
-    console.log(country)
     if (err) throw err;
     res.render("countries/show", {country:country});
   });
