@@ -1,6 +1,6 @@
 ## Countries App
 
-For tonight, we'd like you to combine your knowledge of express, mongo and mongoose to build an application that has full CRUD on countries.
+Combine your knowledge of express, mongo and mongoose to build an application that has full CRUD on countries.
 
 Each country should have a/an:
 
