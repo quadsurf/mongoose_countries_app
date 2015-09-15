@@ -63,7 +63,7 @@ app.put('/countries/:id', function(req,res){
   db.Country.findById(req.params.id,function(err,country){
     // loop over all keys in object
     for(var prop in req.body.country){
-      country.prop = req.body.country[prop];
+      country[prop] = req.body.country[prop];
     }
     country.cities = req.body.cities.split(", ");
     country.save(function(err,country){
